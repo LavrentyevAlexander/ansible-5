@@ -1,0 +1,6 @@
+---    
+- name: Adding virtual host {{vhost_name}} template to nginx
+  vars:
+   locations: [location1, location2, location3]
+  template: src=virt_hosts.conf.j2 dest=/etc/nginx/conf.d/{{vhost_name}}.conf owner=root group=root mode=0644
+  notify: restarting nginx

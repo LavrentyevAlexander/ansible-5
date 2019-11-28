@@ -1,0 +1,18 @@
+server {
+	listen 80;
+
+	server_name {{vhost_name}};
+
+	{% for loc_name in locations %}
+	location /{{loc_name}}/ {
+	{% if locations is defined %} 
+	return 404 "OK, {{loc_name}} in {{vhost_name}}";
+        {% elif vhost_name is defined  %} 
+	return 301 "OK, {{loc_name}} in {{vhost_name}}";
+        {% else %} 
+	return 200 "OK, {{loc_name}} in {{vhost_name}}";
+        {% endif %}
+	}
+	{% endfor %}
+}
+
